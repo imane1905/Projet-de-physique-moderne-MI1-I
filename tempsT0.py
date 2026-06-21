@@ -41,17 +41,14 @@ for it in range(nt - 1):
     for ix in range(1, Nx - 1):
         # dérivée seconde
         derivee_seconde = (psi[ix+1] - 2*psi[ix] + psi[ix-1]) / (dx**2)
-        # approximation de la dérivée seconde en espace
 
-        # Schrödinger
+        # schrodinger
         energie_cinetique = - (hbar**2 / (2 * m)) * derivee_seconde
         energie_potentielle = V[ix] * psi[ix]
         dpsi_dt = (energie_cinetique + energie_potentielle) / (1j * hbar)
-        # équation de Schrödinger, qui donne la variation de Ψ dans le temps
 
         # Euler
         psi[ix] = psi[ix] + dt * dpsi_dt
-        # on avance Ψ d'un petit pas de temps (méthode d'Euler)
 
     if it == 0 or it == nt//3 or it == 2*nt//3 or it == nt-2:
         plt.plot(x, np.abs(psi)**2, label=f"t={it*dt:.2f}")
